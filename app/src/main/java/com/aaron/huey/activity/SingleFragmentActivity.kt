@@ -11,8 +11,9 @@ import com.aaron.huey.R
  * @author Aaron Alba
  */
 abstract class SingleFragmentActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.acitivity_fragment)
 
         // check if a fragment has been hosted already
