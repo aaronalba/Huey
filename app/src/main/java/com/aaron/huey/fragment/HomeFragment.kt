@@ -18,10 +18,14 @@ import com.aaron.huey.R
  * @author Aaron Alba
  */
 class HomeFragment: Fragment() {
+    companion object {
+        const val REQUEST_CAMERA = 1
+        const val REQUEST_GALLERY = 2
+    }
+
     private lateinit var mCameraBtn: Button
     private lateinit var mGalleryBtn: Button
 
-    private val REQUEST_CAMERA = 1
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,17 +51,27 @@ class HomeFragment: Fragment() {
 
     // launches the device's photo viewer to select a photo
     private fun photoPressed(v: View) {
-        Toast.makeText(context, "Photo", Toast.LENGTH_SHORT).show()
+        val galleryIntent = Intent()
+                .setType("image/*")
+                .setAction(Intent.ACTION_PICK)
+
+        startActivityForResult(galleryIntent, REQUEST_GALLERY)
     }
 
 
     /**
-     * Launches the ColorAnalyzer Activity with the given image
+     * Launches the ColorAnalyzer Activity (to be implemented) with the given image
      */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CAMERA && resultCode == Activity.RESULT_OK) {
-            Toast.makeText(context, "image captured!", Toast.LENGTH_SHORT).show()
+        if (resultCode == Activity.RESULT_OK) {
+            when(requestCode) {
+                REQUEST_CAMERA -> {
+                    Toast.makeText(context, "image captured!", Toast.LENGTH_SHORT).show()
+                }
+                REQUEST_GALLERY -> {
+                    Toast.makeText(context, "image chosen!", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 }
