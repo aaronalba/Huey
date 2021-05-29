@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Huey</string>
+    <string name="huey">Huey</string>
+    <string name="home_sub">Generates color scheme from an image</string>
 </resources>
