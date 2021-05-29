@@ -1,10 +1,14 @@
 package com.aaron.huey.fragment
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.aaron.huey.R
 
@@ -17,6 +21,8 @@ class HomeFragment: Fragment() {
     private lateinit var mCameraBtn: Button
     private lateinit var mGalleryBtn: Button
 
+    private val REQUEST_CAMERA = 1
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -27,7 +33,31 @@ class HomeFragment: Fragment() {
 
         mCameraBtn = view.findViewById(R.id.camera_button)
         mGalleryBtn = view.findViewById(R.id.gallery_button)
+        mCameraBtn.setOnClickListener{ cameraPressed(it) }
+        mGalleryBtn.setOnClickListener{ photoPressed(it) }
 
         return view;
+    }
+
+    // launches an intent to capture a photo using the device's camera app
+    private fun cameraPressed(v: View) {
+        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        startActivityForResult(cameraIntent, REQUEST_CAMERA)
+    }
+
+    // launches the device's photo viewer to select a photo
+    private fun photoPressed(v: View) {
+        Toast.makeText(context, "Photo", Toast.LENGTH_SHORT).show()
+    }
+
+
+    /**
+     * Launches the ColorAnalyzer Activity with the given image
+     */
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CAMERA && resultCode == Activity.RESULT_OK) {
+            Toast.makeText(context, "image captured!", Toast.LENGTH_SHORT).show()
+        }
     }
 }
