@@ -26,38 +26,43 @@
         android:paddingBottom="8dp"
         android:paddingTop="8dp">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/vibrant"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:cornerRadius="16dp"
             android:clickable="false"
             android:textColor="@color/white" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/lightVibrant"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:cornerRadius="16dp"
             android:clickable="false"
             android:textColor="@color/white" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/darkVibrant"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:cornerRadius="16dp"
             android:clickable="false"
             android:textColor="@color/white" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/lightMuted"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:cornerRadius="16dp"
             android:clickable="false"
             android:textColor="@color/white" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/darkMuted"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:cornerRadius="16dp"
             android:clickable="false"
             android:textColor="@color/white" />
     </LinearLayout>
