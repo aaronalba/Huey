@@ -2,15 +2,21 @@ package com.aaron.huey.fragment
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import com.aaron.huey.R
+import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * Fragment that will show the screen to pick
@@ -25,6 +31,7 @@ class HomeFragment: Fragment() {
 
     private lateinit var mCameraBtn: Button
     private lateinit var mGalleryBtn: Button
+    private var mCapturedPhotos = 1
 
 
     override fun onCreateView(
@@ -43,10 +50,39 @@ class HomeFragment: Fragment() {
         return view;
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        deleteCachedImages()
+    }
+
+
+
     // launches an intent to capture a photo using the device's camera app
     private fun cameraPressed(v: View) {
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        startActivityForResult(cameraIntent, REQUEST_CAMERA)
+
+        // remove old images in the app's private storage
+        deleteCachedImages()
+
+        // create file to store the captured image
+        val dir: File? = context?.filesDir
+        val fileName: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val file: File = File.createTempFile(
+                "image${mCapturedPhotos++}_${fileName}",
+                ".jpg",
+                dir)
+
+        // put the uri of the file to the intent then launch the intent
+        if (context!=null && dir!=null) {
+            val fileUri: Uri = FileProvider.getUriForFile(
+                    context!!,
+                    "com.aaron.huey.fileprovider",
+                    file
+            )
+            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri)
+            startActivityForResult(cameraIntent, REQUEST_CAMERA)
+        } else
+            Toast.makeText(context, "Unable to start the camera!", Toast.LENGTH_LONG).show()
     }
 
     // launches the device's photo viewer to select a photo
@@ -72,6 +108,20 @@ class HomeFragment: Fragment() {
                     Toast.makeText(context, "image chosen!", Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+    }
+
+
+
+
+    /*
+        Remove all images in the app's private storage.
+     */
+    private fun deleteCachedImages() {
+        val dir: File? = context?.filesDir
+        if (dir != null) {
+            val files: Array<String> = dir.list()
+            files.iterator().forEach { File(dir, it).delete() }
         }
     }
 }
