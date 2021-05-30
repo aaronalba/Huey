@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
@@ -32,6 +33,7 @@ class HomeFragment: Fragment() {
 
     private lateinit var mCameraBtn: Button
     private lateinit var mGalleryBtn: Button
+    private lateinit var mColorText: TextView
     private var mCapturedPhotos = 1
     private var mFileUri: Uri = Uri.EMPTY
 
@@ -45,6 +47,8 @@ class HomeFragment: Fragment() {
 
         mCameraBtn = view.findViewById(R.id.camera_button)
         mGalleryBtn = view.findViewById(R.id.gallery_button)
+        mColorText = view.findViewById(R.id.home_color)
+
         mCameraBtn.setOnClickListener{ cameraPressed(it) }
         mGalleryBtn.setOnClickListener{ photoPressed(it) }
 
@@ -54,6 +58,12 @@ class HomeFragment: Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         deleteCachedImages()
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        mColorText.setTextColor(resources.getColor(randomColor(), null))
     }
 
 
@@ -133,5 +143,30 @@ class HomeFragment: Fragment() {
             val files: Array<String> = dir.list()
             files.iterator().forEach { File(dir, it).delete() }
         }
+    }
+
+
+    /*
+        Returns a random material color
+     */
+    private fun randomColor(): Int {
+        val colorList: List<Int> = listOf(
+                R.color.red_500,
+                R.color.pink_500,
+                R.color.purple_500,
+                R.color.blue_500,
+                R.color.lightBlue_500,
+                R.color.cyan_500,
+                R.color.teal_500,
+                R.color.green_500,
+                R.color.lime_500,
+                R.color.yellow_500,
+                R.color.amber_500,
+                R.color.orange_500,
+                R.color.deepOrange_500
+        )
+
+//        return colorList[(colorList.indices).random()]
+        return colorList[12]
     }
 }
