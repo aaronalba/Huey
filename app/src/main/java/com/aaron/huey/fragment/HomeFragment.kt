@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import com.aaron.huey.R
+import com.aaron.huey.activity.ResultActivity
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -103,6 +104,8 @@ class HomeFragment: Fragment() {
             when(requestCode) {
                 REQUEST_CAMERA -> {
                     Toast.makeText(context, "image captured! ${mFileUri}", Toast.LENGTH_LONG).show()
+                    val intent = Intent(context, ResultActivity::class.java)
+                    startActivity(intent)
                 }
                 REQUEST_GALLERY -> {
                     Toast.makeText(context, "image chosen!", Toast.LENGTH_SHORT).show()

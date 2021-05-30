@@ -16,6 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.ResultActivity" />
+
         <provider
             android:authorities="com.aaron.huey.fileprovider"
             android:name="androidx.core.content.FileProvider"
