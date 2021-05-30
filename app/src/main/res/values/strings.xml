@@ -3,7 +3,7 @@
     <string name="huey">Huey</string>
     <string name="home_sub_start">Generates a</string>
     <string name="color">color</string>
-    <string name="home_sub_end">scheme from an image</string>
+    <string name="home_sub_end">palette from an image</string>
 
 
 </resources>
