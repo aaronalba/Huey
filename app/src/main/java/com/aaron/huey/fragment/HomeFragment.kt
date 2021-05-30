@@ -97,23 +97,25 @@ class HomeFragment: Fragment() {
 
 
     /**
-     * Launches the ColorAnalyzer Activity (to be implemented) with the given image
+     * Launches the Result Activity with the given uri pointing to the image
      */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK) {
+            val context = context   // the context that will be used to launch the intents
+
             when(requestCode) {
                 REQUEST_CAMERA -> {
-                    Toast.makeText(context, "image captured! ${mFileUri}", Toast.LENGTH_LONG).show()
-                    val context = context
                     if (context!=null) {
                         val intent = ResultActivity.newIntent(context, mFileUri)
                         startActivity(intent)
                     }
                 }
                 REQUEST_GALLERY -> {
-                    Toast.makeText(context, "image chosen!", Toast.LENGTH_SHORT).show()
-                    val uri = data?.data
-
+                    val uri: Uri? = data?.data
+                    if (uri != null && context != null) {
+                        val intent = ResultActivity.newIntent(context, uri)
+                        startActivity(intent)
+                    }
                 }
             }
         }
