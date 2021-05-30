@@ -9,9 +9,9 @@ Download the apk file in the demo directory named `huey.apk` and install it on y
 * Get the color palette of a selected image from the device's photo gallery.
 
 ## Demo
-![demo-photo-1](github link)
-![demo-photo-2](github link)
-![demo-photo-3](github link)
-![demo-photo-4](github link)
-![demo-photo-5](github link)
-![demo-photo-6](github link)
+![demo-photo-1](https://github.com/aaronalba/Huey/blob/main/demo/demo-photo-1.jpg)
+![demo-photo-2](https://github.com/aaronalba/Huey/blob/main/demo/demo-photo-2.jpg)
+![demo-photo-3](https://github.com/aaronalba/Huey/blob/main/demo/demo-photo-3.jpg)
+![demo-photo-4](https://github.com/aaronalba/Huey/blob/main/demo/demo-photo-4.jpg)
+![demo-photo-5](https://github.com/aaronalba/Huey/blob/main/demo/demo-photo-5.jpg)
+![demo-photo-6](https://github.com/aaronalba/Huey/blob/main/demo/demo-photo-6.jpg)
