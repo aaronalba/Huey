@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/design_default_color_primary_dark">
+    android:background="@color/grey_700">
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/gallery_button"
@@ -17,9 +17,9 @@
         android:insetRight="0dp"
         android:insetBottom="0dp"
         app:cornerRadius="30dp"
-        app:iconPadding="0dp"
-        app:iconGravity="textStart"
         app:icon="@drawable/ic_action_gallery"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
         app:iconTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,9 +40,9 @@
         android:insetBottom="0dp"
         app:cornerRadius="30dp"
         app:icon="@drawable/ic_action_camera"
-        app:iconTint="@color/white"
-        app:iconPadding="0dp"
         app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:iconTint="@color/white"
         app:layout_constraintEnd_toStartOf="@+id/gallery_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/gallery_button"
