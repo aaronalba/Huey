@@ -32,7 +32,7 @@ class HomeFragment: Fragment() {
     private lateinit var mCameraBtn: Button
     private lateinit var mGalleryBtn: Button
     private var mCapturedPhotos = 1
-
+    private var mFileUri: Uri = Uri.EMPTY
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -74,12 +74,12 @@ class HomeFragment: Fragment() {
 
         // put the uri of the file to the intent then launch the intent
         if (context!=null && dir!=null) {
-            val fileUri: Uri = FileProvider.getUriForFile(
+            mFileUri = FileProvider.getUriForFile(
                     context!!,
                     "com.aaron.huey.fileprovider",
                     file
             )
-            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri)
+            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, mFileUri)
             startActivityForResult(cameraIntent, REQUEST_CAMERA)
         } else
             Toast.makeText(context, "Unable to start the camera!", Toast.LENGTH_LONG).show()
@@ -102,7 +102,7 @@ class HomeFragment: Fragment() {
         if (resultCode == Activity.RESULT_OK) {
             when(requestCode) {
                 REQUEST_CAMERA -> {
-                    Toast.makeText(context, "image captured!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "image captured! ${mFileUri}", Toast.LENGTH_LONG).show()
                 }
                 REQUEST_GALLERY -> {
                     Toast.makeText(context, "image chosen!", Toast.LENGTH_SHORT).show()
