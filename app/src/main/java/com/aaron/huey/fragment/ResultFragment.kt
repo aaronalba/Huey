@@ -75,10 +75,9 @@ class ResultFragment: Fragment() {
 
             val palette = Palette.from(image).generate()
 
-            val vibrant: Int = palette.getVibrantColor(-1)
+            val vibrant: Int = palette.getVibrantColor(Color.BLACK)
             mVibrant.setBackgroundColor(vibrant)
             mVibrant.text = toHex(vibrant)
-
 
             val lightVibrant: Int = palette.getLightVibrantColor(Color.BLACK)
             mLightVibrant.setBackgroundColor(lightVibrant)
