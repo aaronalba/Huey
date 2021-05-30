@@ -166,7 +166,6 @@ class HomeFragment: Fragment() {
                 R.color.deepOrange_500
         )
 
-//        return colorList[(colorList.indices).random()]
-        return colorList[12]
+        return colorList[(colorList.indices).random()]
     }
 }
