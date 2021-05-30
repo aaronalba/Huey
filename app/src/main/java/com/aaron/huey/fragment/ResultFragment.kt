@@ -81,7 +81,7 @@ class ResultFragment: Fragment() {
 
             val lightVibrant: Int = palette.getLightVibrantColor(Color.BLACK)
             mLightVibrant.setBackgroundColor(lightVibrant)
-            mLightVibrant.text = toHex(vibrant)
+            mLightVibrant.text = toHex(lightVibrant)
 
             val darkVibrant: Int = palette.getDarkVibrantColor(Color.BLACK)
             mDarkVibrant.setBackgroundColor(darkVibrant)
