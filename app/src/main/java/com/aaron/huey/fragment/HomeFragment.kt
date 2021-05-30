@@ -104,11 +104,16 @@ class HomeFragment: Fragment() {
             when(requestCode) {
                 REQUEST_CAMERA -> {
                     Toast.makeText(context, "image captured! ${mFileUri}", Toast.LENGTH_LONG).show()
-                    val intent = Intent(context, ResultActivity::class.java)
-                    startActivity(intent)
+                    val context = context
+                    if (context!=null) {
+                        val intent = ResultActivity.newIntent(context, mFileUri)
+                        startActivity(intent)
+                    }
                 }
                 REQUEST_GALLERY -> {
                     Toast.makeText(context, "image chosen!", Toast.LENGTH_SHORT).show()
+                    val uri = data?.data
+
                 }
             }
         }
