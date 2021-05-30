@@ -2,7 +2,9 @@ package com.aaron.huey.fragment
 
 import android.content.ContentResolver
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.graphics.ImageDecoder
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -10,13 +12,10 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.palette.graphics.Palette
 import com.aaron.huey.R
-import java.io.File
-import java.util.ArrayList
 
 class ResultFragment: Fragment() {
     companion object {
@@ -36,6 +35,12 @@ class ResultFragment: Fragment() {
 
     private lateinit var mResultImage: ImageView
     private lateinit var mColorHolder: LinearLayout
+    private lateinit var mVibrant: Button
+    private lateinit var mLightVibrant: Button
+    private lateinit var mDarkVibrant: Button
+    private lateinit var mLightMuted: Button
+    private lateinit var mDarkMuted: Button
+
     private var mUri: Uri = Uri.EMPTY
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,6 +57,11 @@ class ResultFragment: Fragment() {
 
         mResultImage = view.findViewById(R.id.result_image)
         mColorHolder = view.findViewById(R.id.color_holder)
+        mVibrant = view.findViewById(R.id.vibrant)
+        mLightVibrant = view.findViewById(R.id.lightVibrant)
+        mDarkVibrant = view.findViewById(R.id.darkVibrant)
+        mLightMuted = view.findViewById(R.id.lightMuted)
+        mDarkMuted = view.findViewById(R.id.darkMuted)
 
         return view
     }
@@ -62,6 +72,29 @@ class ResultFragment: Fragment() {
         val image: Bitmap? = getImage(mUri)
         if (image != null) {
             mResultImage.setImageBitmap(image)
+
+            val palette = Palette.from(image).generate()
+
+            val vibrant: Int = palette.getVibrantColor(-1)
+            mVibrant.setBackgroundColor(vibrant)
+            mVibrant.text = toHex(vibrant)
+
+
+            val lightVibrant: Int = palette.getLightVibrantColor(Color.BLACK)
+            mLightVibrant.setBackgroundColor(lightVibrant)
+            mLightVibrant.text = toHex(vibrant)
+
+            val darkVibrant: Int = palette.getDarkVibrantColor(Color.BLACK)
+            mDarkVibrant.setBackgroundColor(darkVibrant)
+            mDarkVibrant.text = toHex(darkVibrant)
+
+            val lightMuted: Int = palette.getLightMutedColor(Color.BLACK)
+            mLightMuted.setBackgroundColor(lightMuted)
+            mLightMuted.text = toHex(lightMuted)
+
+            val darkMuted: Int = palette.getDarkMutedColor(Color.BLACK)
+            mDarkMuted.setBackgroundColor(darkMuted)
+            mDarkMuted.text = toHex(darkMuted)
         }
     }
 
@@ -69,7 +102,7 @@ class ResultFragment: Fragment() {
     /**
      * Returns a the bitmap of the image given the uri.
      */
-    fun getImage(uri: Uri): Bitmap? {
+    private fun getImage(uri: Uri): Bitmap? {
         val contentResolver: ContentResolver? = activity?.contentResolver
 
         if (contentResolver != null) {
@@ -81,6 +114,15 @@ class ResultFragment: Fragment() {
             }
         }
         return null
+    }
+
+
+    /**
+     * Converts a color integer to hex string
+     */
+    private fun toHex(color: Int): String {
+        val hex = Integer.toString(color, 16).substring(2)
+        return "#$hex"
     }
 
 }
