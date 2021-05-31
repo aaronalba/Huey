@@ -2,7 +2,8 @@
 An android app that can generate a color palette from a captured image or a saved photo.
 
 ## How to install?
-Download the apk file in the demo directory named `huey.apk` and install it on your device.
+Download the apk file in the demo directory named `huey.apk` and install it on your device.  
+***Minimum Android Version*** : Android 9
 
 ## Features
 * Get the color palette of a captured image.
